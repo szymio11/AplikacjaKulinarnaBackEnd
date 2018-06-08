@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AplikacjaKulinarna.Data.DbModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace AplikacjaKulinarna.Repository
 {
@@ -9,6 +10,7 @@ namespace AplikacjaKulinarna.Repository
             
         }
 
+        public DbSet<User> Users { get; set; }
 
 
     }
