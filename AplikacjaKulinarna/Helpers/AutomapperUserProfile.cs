@@ -4,9 +4,9 @@ using AutoMapper;
 
 namespace AplikacjaKulinarna.API.Helpers
 {
-    public class AutomapperUserProfile : Profile
+    public class AutoMapperUserProfile : Profile
     {
-        public AutomapperUserProfile()
+        public AutoMapperUserProfile()
         {
             CreateMap<CreateUserDto, User>();
             CreateMap<User, UserDto>();

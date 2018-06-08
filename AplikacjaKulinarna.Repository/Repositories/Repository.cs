@@ -36,7 +36,7 @@ namespace AplikacjaKulinarna.Repository.Repositories
         }
 
 
-        public virtual async Task<T> GetAsync(int id)
+        public virtual async Task<T> GetAsync(Guid id)
         {
             return await _entities.FindAsync(id);
         }

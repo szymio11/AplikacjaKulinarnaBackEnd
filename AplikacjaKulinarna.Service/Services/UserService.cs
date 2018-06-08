@@ -23,7 +23,7 @@ namespace AplikacjaKulinarna.Service.Services
         }
 
         public async Task<AccountDto> GetAccountAsync(Guid userId)
-        {
+        { 
             if (!await _repository.Exist(x=>x.Id==userId))
             {
                 throw new Exception("Nie ma takiego Używtkownika");
