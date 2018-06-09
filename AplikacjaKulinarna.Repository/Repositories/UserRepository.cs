@@ -11,7 +11,7 @@ namespace AplikacjaKulinarna.Repository.Repositories
         public UserRepository(DataContext context) : base(context)
         {
         }
-        public async  Task<User> GetAsync(Guid id)
+        public override async Task<User> GetAsync(Guid id)
         {
             return await _context.Users.SingleOrDefaultAsync(a => a.Id == id);
         }

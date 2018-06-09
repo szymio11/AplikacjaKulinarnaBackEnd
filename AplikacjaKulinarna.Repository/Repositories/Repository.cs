@@ -24,7 +24,7 @@ namespace AplikacjaKulinarna.Repository.Repositories
         {
             return _entities;
         }
-        public virtual async Task<bool> Exist(Expression<Func<T, bool>> match)
+        public virtual async Task<bool> ExistAsync(Expression<Func<T, bool>> match)
         {
             return await _context.Set<T>().AnyAsync(match);
         }
@@ -102,6 +102,10 @@ namespace AplikacjaKulinarna.Repository.Repositories
         public virtual async Task<ICollection<T>> FindByAsyn(Expression<Func<T, bool>> predicate)
         {
             return await _entities.Where(predicate).ToListAsync();
+        }
+        public virtual async Task<T> FindByAsyn(Expression<Func<T, bool>> predicate, Expression<Func<T, bool>> single)
+        {
+            return await _entities.Where(predicate).SingleOrDefaultAsync(single);
         }
 
         public IQueryable<T> GetAllIncluding(params Expression<Func<T, object>>[] includeProperties)

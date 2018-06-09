@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AplikacjaKulinarna.API.Controllers
 {
-    [Authorize]
+    [Authorize(Policy = "HasAdminRole")]
     [Route("api/recipe")]
     public class RecipeController : ApiControllerBase
     {
@@ -39,10 +39,11 @@ namespace AplikacjaKulinarna.API.Controllers
             await _service.DeleteRecipe(id); 
             return Ok();
         }
+        [AllowAnonymous]
         [HttpGet("{id}",Name = "GetRecipe")]
         public async Task<IActionResult> GetRecipe(Guid id)
         {
-            var result = await _service.GetRecipe(id);
+            var result = await _service.GetRecipeAsync(id);
             return Ok(result);
         }
 

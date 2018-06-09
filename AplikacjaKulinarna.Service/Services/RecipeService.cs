@@ -26,12 +26,12 @@ namespace AplikacjaKulinarna.Service.Services
             recipe.UserId = userId;
             recipe.Created = DateTime.Now;
             await _repository.AddAsyn(recipe);
-            return await GetRecipe(recipe.Id);
+            return await GetRecipeAsync(recipe.Id);
         }
 
-        public async Task<RecipeDto> GetRecipe(Guid id)
+        public async Task<RecipeDto> GetRecipeAsync(Guid id)
         {
-            if (!await _repository.Exist(a=>a.Id==id))
+            if (!await _repository.ExistAsync(a=>a.Id==id))
             {
                 throw new Exception("Nie ma takiego przepisu.");
             }
@@ -42,7 +42,7 @@ namespace AplikacjaKulinarna.Service.Services
 
         public async Task UpdateRecipeAsync(SaveRecipeDto saveRecipeDto,Guid id)
         {
-            if (!await _repository.Exist(a => a.Id == id))
+            if (!await _repository.ExistAsync(a => a.Id == id))
             {
                 throw new Exception("Nie ma takiego przepisu.");
             }
@@ -53,7 +53,7 @@ namespace AplikacjaKulinarna.Service.Services
 
         public async Task DeleteRecipe(Guid id)
         {
-            if (!await _repository.Exist(a => a.Id == id))
+            if (!await _repository.ExistAsync(a => a.Id == id))
             {
                 throw new Exception("Nie ma takiego przepisu.");
             }

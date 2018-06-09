@@ -37,12 +37,14 @@ namespace AplikacjaKulinarna.API
             services.Configure<JwtSettings>(appSettingsSection);
             //var appSettings = appSettingsSection.Get<JwtSettings>();
             var key = Encoding.UTF8.GetBytes("super_hubert_nie_super_lokata");
+            services.AddAuthorization(x => x.AddPolicy("HasAdminRole", p => p.RequireRole("admin")));
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IUserRepository,UserRepository>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IJwtHandler, JwtHandler>();
             services.AddScoped<IRecipeRepository, RecipeRepository>();
             services.AddScoped<IRecipeService, RecipeService>();
+            services.AddScoped<IRatingService, RatingService>();
             services.AddAuthentication(x =>
                 {
                     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

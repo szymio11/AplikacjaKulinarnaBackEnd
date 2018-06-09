@@ -7,6 +7,6 @@ namespace AplikacjaKulinarna.Repository.Interfaces
 {
     public interface IUserRepository : IRepository<User>
     {
-        Task<User> GetAsync(Guid id); 
+        new Task<User> GetAsync(Guid id); 
     }
 }

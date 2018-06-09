@@ -7,6 +7,7 @@
   <ItemGroup>
     <Compile Remove="Migrations\20180606144935_Initial.cs" />
     <Compile Remove="Migrations\20180608155547_AddRecipe.cs" />
+    <Compile Remove="Migrations\20180608213826_test.cs" />
   </ItemGroup>
 
   <ItemGroup>

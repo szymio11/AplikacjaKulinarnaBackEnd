@@ -24,7 +24,7 @@ namespace AplikacjaKulinarna.Service.Services
 
         public async Task<AccountDto> GetAccountAsync(Guid userId)
         { 
-            if (!await _repository.Exist(x=>x.Id==userId))
+            if (!await _repository.ExistAsync(x=>x.Id==userId))
             {
                 throw new Exception("Nie ma takiego Używtkownika");
             }
@@ -36,7 +36,7 @@ namespace AplikacjaKulinarna.Service.Services
 
         public async Task RegisterUserAsync(CreateUserDto createUserDto)
         {
-            if (await _repository.Exist(a=>a.Email==createUserDto.Email))
+            if (await _repository.ExistAsync(a=>a.Email==createUserDto.Email))
             {
                 throw new Exception("Taki Mail Już istnieje");
             }
@@ -49,7 +49,7 @@ namespace AplikacjaKulinarna.Service.Services
         public async Task<TokenDto> LoginAsync(LoginDto loginDto)
         {
             
-            if (!await _repository.Exist(a=>a.Email==loginDto.Email)) 
+            if (!await _repository.ExistAsync(a=>a.Email==loginDto.Email)) 
             {
                 throw new Exception("Nie ma takiego użytkownika o tym loginie");
             }
