@@ -25,6 +25,8 @@ namespace AplikacjaKulinarna.Service.Services
             var recipe = _mapper.Map<SaveRecipeDto, Recipe>(saveRecipeDto);
             recipe.UserId = userId;
             recipe.Created = DateTime.Now;
+            var timeSpaninMinutes = recipe.PreparationTime.Add(new TimeSpan(0, saveRecipeDto.PreparationTimeInMinutes, 0));
+            recipe.PreparationTime = timeSpaninMinutes;
             await _repository.AddAsyn(recipe);
             return await GetRecipeAsync(recipe.Id);
         }
@@ -47,7 +49,11 @@ namespace AplikacjaKulinarna.Service.Services
                 throw new Exception("Nie ma takiego przepisu.");
             }
             var recipe = await _repository.GetAsync(id);
-            _mapper.Map(saveRecipeDto, recipe);
+            var recipeMapped = _mapper.Map(saveRecipeDto, recipe);
+            recipe.PreparationTime= TimeSpan.Zero;
+            var timeSpaninMinutes = recipe.PreparationTime.Add(new TimeSpan(0, saveRecipeDto.PreparationTimeInMinutes, 0));
+            recipeMapped.PreparationTime = timeSpaninMinutes;
+          
             await _repository.SaveAsync();
         }
 
