@@ -24,7 +24,6 @@ namespace AplikacjaKulinarna.API.Controllers
             {
                 return BadRequest(ModelState);
             }
-
             var result = await _service.CreateRatingAsync(ratingDto, recipeId, UserId);
             return CreatedAtRoute("GetRating",new { recipeId, ratingId = result.Id},result);
         }

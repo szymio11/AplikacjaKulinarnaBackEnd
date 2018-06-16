@@ -1,5 +1,6 @@
 ﻿using AplikacjaKulinarna.Data.DbModels;
 using AplikacjaKulinarna.Data.ModelsDto.Rating;
+using AplikacjaKulinarna.Data.ModelsDto.Recipe;
 using AutoMapper;
 
 namespace AplikacjaKulinarna.API.Helpers
@@ -10,6 +11,7 @@ namespace AplikacjaKulinarna.API.Helpers
         {
             CreateMap<SaveRatingDto, Rating>();
             CreateMap<Rating, RatingDto>();
+            CreateMap<Rating, GetRecipeUpdateDto>();
         }
     }
 }

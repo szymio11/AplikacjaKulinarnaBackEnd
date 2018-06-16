@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AplikacjaKulinarna.Data.DbModels;
 using AplikacjaKulinarna.Data.ModelsDto.Recipe;
@@ -65,6 +66,24 @@ namespace AplikacjaKulinarna.Service.Services
             }
             var recipe = await _repository.GetAsync(id);
             await _repository.DeleteAsyn(recipe);
+        }
+        public async Task<IEnumerable<RecipeDto>> GetAllRecipesAsync()
+        {
+            var recipes = await _repository.GetRecipesAsync();
+            var result = _mapper.Map<IEnumerable<RecipeDto>>(recipes);
+            return result;
+        }
+
+        public async Task<GetRecipeUpdateDto> GetUpdate(Guid id)
+        {
+            if (!await _repository.ExistAsync(a => a.Id == id))
+            {
+                throw new Exception("Nie ma takiego przepisu.");
+            }
+
+            var recipe = await _repository.GetAsync(id);
+            var result = _mapper.Map<GetRecipeUpdateDto>(recipe);
+            return result;
         }
     }
 }

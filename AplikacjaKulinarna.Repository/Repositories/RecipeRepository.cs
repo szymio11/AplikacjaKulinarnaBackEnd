@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AplikacjaKulinarna.Data.DbModels;
 using AplikacjaKulinarna.Repository.Interfaces;
@@ -17,5 +18,13 @@ namespace AplikacjaKulinarna.Repository.Repositories
                 .Include(u=>u.User)
                 .Include(r=>r.Ratings)
                 .SingleOrDefaultAsync(a=>a.Id==id);
+
+        public async Task<IEnumerable<Recipe>> GetRecipesAsync()
+        {
+           return await _context.Recipes
+                .Include(u => u.User)
+                .Include(r => r.Ratings)
+                .ToListAsync();
+        }
     }
 }

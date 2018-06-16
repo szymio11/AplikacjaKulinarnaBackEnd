@@ -39,11 +39,25 @@ namespace AplikacjaKulinarna.API.Controllers
             await _service.DeleteRecipe(id); 
             return Ok();
         }
+        //get do pobrania danych potrzbnych dla updata 
+        [HttpGet("{id}/update")]
+        public async Task<IActionResult> GetRecipeUpdate(Guid id)
+        {
+            var result = await _service.GetUpdate(id);
+            return Ok(result);
+        }
         [AllowAnonymous]
         [HttpGet("{id}",Name = "GetRecipe")]
         public async Task<IActionResult> GetRecipe(Guid id)
         {
             var result = await _service.GetRecipeAsync(id);
+            return Ok(result);
+        }
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetRecipes()
+        {
+            var result = await _service.GetAllRecipesAsync();
             return Ok(result);
         }
 
