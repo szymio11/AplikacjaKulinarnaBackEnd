@@ -35,7 +35,7 @@ namespace AplikacjaKulinarna.Service.Services
             {
                 throw new Exception("Nie ma takiego przepisu.");
             }
-            var recipe = await _repository.GetAllIncluding(u => u.User).SingleOrDefaultAsync(r => r.Id == id);
+            var recipe = await _repository.GetAllIncluding(u => u.User,r=>r.Ratings).SingleOrDefaultAsync(r => r.Id == id);
             var result = _mapper.Map<RecipeDto>(recipe);
             return result;
         }

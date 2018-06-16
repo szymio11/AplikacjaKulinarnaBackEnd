@@ -42,7 +42,7 @@ namespace AplikacjaKulinarna.Service.Services
             }
             var user = _mapper.Map<CreateUserDto, User>(createUserDto);
             user.Created = DateTime.UtcNow;
-            user.Role = "User";
+            user.Role = "user";
             await _repository.AddAsyn(user);
         }
 
@@ -60,12 +60,13 @@ namespace AplikacjaKulinarna.Service.Services
                 throw new Exception("Złe Hasło!");
             }
 
-            var token = _jwtHandler.CreateToken(user.Id, user.Role);
+            var token = _jwtHandler.CreateToken(user.Id,user.Email,user.Name, user.Role);
             return new TokenDto
             {
                 Token = token.Token,
                 Expires = token.Expires,
-                Role = user.Role
+                Role = user.Role,
+                Email = user.Email
             };
         }
     }

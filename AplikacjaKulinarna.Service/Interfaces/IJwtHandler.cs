@@ -5,6 +5,6 @@ namespace AplikacjaKulinarna.Service.Interfaces
 {
     public interface IJwtHandler
     {
-        JwtDto CreateToken(Guid userId, string role);
+        JwtDto CreateToken(Guid userId, string email, string name, string role);
     }
 }

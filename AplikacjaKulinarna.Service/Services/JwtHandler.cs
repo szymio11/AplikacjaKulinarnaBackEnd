@@ -19,14 +19,17 @@ namespace AplikacjaKulinarna.Service.Services
         {
             _jwtOptions = jwtOptions.Value;
         }
-        public JwtDto CreateToken(Guid userId, string role)
+        public JwtDto CreateToken(Guid userId,string email,string name, string role)
         {
             var now = DateTime.UtcNow;
             var claims = new Claim[]
             {
                 new Claim(JwtRegisteredClaimNames.Sub, userId.ToString()),
                 new Claim(JwtRegisteredClaimNames.UniqueName, userId.ToString()),
+                new Claim(JwtRegisteredClaimNames.Email,email),
+                new Claim(JwtRegisteredClaimNames.GivenName,name),
                 new Claim(ClaimTypes.Role, role),
+                new Claim(JwtRegisteredClaimNames.Typ,role),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Iat, now.ToTimestamp().ToString())
             };

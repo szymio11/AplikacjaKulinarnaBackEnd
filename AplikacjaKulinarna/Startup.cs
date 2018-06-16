@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using AplikacjaKulinarna.API.Helpers;
 using AplikacjaKulinarna.Repository;
 using AplikacjaKulinarna.Repository.Interfaces;
 using AplikacjaKulinarna.Repository.Repositories;
@@ -29,6 +30,7 @@ namespace AplikacjaKulinarna.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default"), b => b.MigrationsAssembly("AplikacjaKulinarna.Repository")));
             services.AddMvc();
             services.AddAutoMapper();
@@ -36,6 +38,8 @@ namespace AplikacjaKulinarna.API
             var appSettingsSection = Configuration.GetSection("jwt");
             services.Configure<JwtSettings>(appSettingsSection);
             //var appSettings = appSettingsSection.Get<JwtSettings>();
+            //var appSettings = appSettingsSection.Key;
+            //var test = appSettings.Key;
             var key = Encoding.UTF8.GetBytes("super_hubert_nie_super_lokata");
             services.AddAuthorization(x => x.AddPolicy("HasAdminRole", p => p.RequireRole("admin")));
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
@@ -87,12 +91,17 @@ namespace AplikacjaKulinarna.API
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-
+            app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials());
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
             app.UseAuthentication();
+            app.UseErrorHandler();
             app.UseMvc();
            
         }
