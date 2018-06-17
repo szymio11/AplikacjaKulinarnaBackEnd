@@ -11,7 +11,7 @@ namespace AplikacjaKulinarna.API.Helpers
         {
             CreateMap<SaveRatingDto, Rating>();
             CreateMap<Rating, RatingDto>();
-            CreateMap<Rating, GetRecipeUpdateDto>();
+            
         }
     }
 }

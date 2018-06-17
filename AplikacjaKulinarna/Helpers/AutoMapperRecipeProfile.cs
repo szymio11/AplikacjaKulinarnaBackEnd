@@ -15,15 +15,18 @@ namespace AplikacjaKulinarna.API.Helpers
             CreateMap<Recipe, RecipeDto>()
                 .ForMember(gdt => gdt.Rating,
                     otp => otp.MapFrom(src => src.Ratings.Any() ? src.Ratings.Select(a=>a.Value).Average() : src.Ratings.Count))
-                 .ForMember(dto=>dto.User,opt=>opt.MapFrom( u=>
+                .ForMember(dto=>dto.User,opt=>opt.MapFrom( u=>
                     new AccountDto
                 {
                     Email = u.User.Email,
                     Id =u.User.Id,
                     Name = u.User.Name,
                     Role = u.User.Role
-                }))
-                ;
+                }));
+            CreateMap<Recipe, GetRecipeUpdateDto>()
+                .ForMember(dto => dto.PreparationTimeInMinutes,
+                    opt => opt.MapFrom(src => src.PreparationTime.TotalMinutes));
         }
+
     }
 }

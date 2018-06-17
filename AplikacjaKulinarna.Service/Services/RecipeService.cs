@@ -26,7 +26,7 @@ namespace AplikacjaKulinarna.Service.Services
             var recipe = _mapper.Map<SaveRecipeDto, Recipe>(saveRecipeDto);
             recipe.UserId = userId;
             recipe.Created = DateTime.Now;
-            var timeSpaninMinutes = recipe.PreparationTime.Add(new TimeSpan(0, saveRecipeDto.PreparationTimeInMinutes, 0));
+            var timeSpaninMinutes = recipe.PreparationTime.Add(new TimeSpan(0, saveRecipeDto.PreparationTimeInMinutes , 0));
             recipe.PreparationTime = timeSpaninMinutes;
             await _repository.AddAsyn(recipe);
             return await GetRecipeAsync(recipe.Id);
