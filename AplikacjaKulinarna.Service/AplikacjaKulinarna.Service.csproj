@@ -10,7 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\AplikacjaKulinarna.Data\AplikacjaKulinarna.Data.csproj" />
     <ProjectReference Include="..\AplikacjaKulinarna.Repository\AplikacjaKulinarna.Repository.csproj" />
   </ItemGroup>
 
