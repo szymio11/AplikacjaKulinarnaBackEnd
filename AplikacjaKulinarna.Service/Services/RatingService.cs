@@ -22,10 +22,7 @@ namespace AplikacjaKulinarna.Service.Services
         }
         public async Task<RatingDto> CreateRatingAsync(SaveRatingDto saveRatingDto, Guid recipeId, Guid userId)
         {
-            if (await _recipeRepository.ExistAsync(a => a.UserId == userId))
-            {
-                throw new Exception("Ten użytkownik już dodał ocenę");
-            }
+           
             if (!await _recipeRepository.ExistAsync(a=>a.Id==recipeId))
             {
                 throw new Exception("Nie ma takiego Przepisu");
